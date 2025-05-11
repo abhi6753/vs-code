@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "iostream": "cpp",
+        "iomanip": "cpp",
+        "ostream": "cpp",
+        "cmath": "cpp",
+        "*.tcc": "cpp",
+        "rotation of array using juglling algorithm": "cpp",
+        "sstream": "cpp",
+        "string": "cpp",
+        "algorithm": "cpp",
+        "regex": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
+}

@@ -1,0 +1,1 @@
+cout<<"please enter n ≥ r ≥ 0"<<endl;
