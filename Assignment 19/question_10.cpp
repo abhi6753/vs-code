@@ -1,28 +1,33 @@
 // 10. Create an authentication system. It should be menu driven.
 
-//Humne authentication system bnaya hai jisme phle valid admin hai ya ni usko check krega agr valid admin hai to fir
-// student name and his/her roll no. can added in student string
-// Note:: Humne admin array ko as a admin data base  mana hai jisme phle se hi valid admin username & password rakha hua hai
-// Hum studentData me jo v value lenge usey maan k chl rhe hai ki hum ek text file me rakh rhe hai
-// but hum file me rakhna tb sikhenge jab file handling padh lenge
+// Humne authentication system bnaya hai jisme phle valid admin hai ya ni usko check krega agr valid admin hai to fir
+//  student name and his/her roll no. can added in student string
+//  Note:: Humne admin array ko as a admin data base  mana hai jisme phle se hi valid admin username & password rakha hua hai
+//  Hum studentData me jo v value lenge usey maan k chl rhe hai ki hum ek text file me rakh rhe hai
+//  but hum file me rakhna tb sikhenge jab file handling padh lenge
 #include <iostream>
 #include <string>
+#include<algorithm>
 using namespace std;
-bool  student()
+bool student()
 {
-    int num;
-    input:
+    int i=0, num;
+    bool flag = true;
+input:
     cout << "Enter number of student: " << endl;
     cin >> num;
-    if(num<0){
-      cout<<"Number of student sould be greater than 0"<<endl<<endl;
-      goto input;}
-if(num==0)
-  return false;
-    num *= 2; // double size ka array islie bnaye hai q ki hum student name and roll num of that student want to store
+    if (num < 0)
+    {
+        cout << "Number of student sould be greater than 0" << endl
+             << endl;
+        goto input;
+    }
+    if (num == 0)
+        flag= false;
+    num*=2;// double size ka array islie bnaye hai q ki hum student name and roll num of that student want to store
     fflush(stdin);
     string studentData[num];
-    for (int i = 0; i < num / 2; i++)
+    for ( i = 0; i < num/2 ; i++)
     {
         cout << "Enter name of student: ";
     name:
@@ -33,31 +38,37 @@ if(num==0)
         cout << "Enter roll no. of student: ";
     roll:
         getline(cin, studentData[num / 2 + i]);
-        if (studentData[num / 2 + i].size() == 0)
+        if (studentData[num /2 + i].size() == 0)
             goto roll;
         // I can add one more conditon student roll allowed only 0-9 character
     }
-    cout << "Student Data added successfully" << endl;
-     return true;
-
+    if(flag == true)
+    cout << "\nStudent Data added successfully" << endl;
+    else
+    {
+        cout<<"\nNo any stduent data added"<<endl;
+    }
+    return true;
 }
+
 int main()
 {
     int ch, i, attempt = 3;
-    bool flag = false;
+    bool flag = false,id=false;
     int numOfUser = 3 * 2; // user 3 hi hai lekin hume unka password v store krwana hai isiliye double size ka array bna rhe
-    string admin[numOfUser] = {"abhishek29073@gmail.com", "sonuk314@gmail.com", "ramanujshram256@gmail.com", "Abhishek@9155", "Vivek@9031", "Sharma@9771"};
+    string admin[numOfUser] = {"abhishek29073@gmail.com", "sonuk8314@gmail.com", "ramanujsharma256@gmail.com", "Abhishek@9155", "Vivek@9031", "Sharma@9771"};
     string user[2]; // user input to authenticate]
     cout << "\t\t\t\t\t\t\tAdmin Verification" << endl;
 users:
-    if (attempt == 3)
-        cout << "Enter user id: " << endl;
+    //if (attempt == 3)
+        cout << "Enter user id: " ;
 
     if (attempt != 3)
     {
-        cout << "\t\t\t\t\t\t\tRemaining Attempt : " << attempt + 1 << endl;
+        cout << "\t\t\t\t\t\t\tRemaining Attempt : " << attempt + 1 ;
     }
-    getline(cin, user[0]);
+    cout<<endl;
+    getline(cin, user[0]); // input user id
     if (user[0].size() == 0)
     {
         goto users;
@@ -65,14 +76,15 @@ users:
 
     for (i = 0; i < numOfUser / 2; i++) // user login user id & pass validation
     {
-        if (user[0] == admin[i])
+        if (user[0]==admin[i])
         {
-               attempt = 3;
+           
+            id = flag = true;
+            attempt = 3;
         pass:
             if (attempt == 3)
                 cout << "Enter password: " << endl;
 
-            
             if (attempt != 3)
             {
                 cout << "\t\t\t\t\t\t\tRemaining Attempt : " << attempt + 1 << endl;
@@ -83,50 +95,39 @@ users:
                 goto pass;
             }
 
-            if (user[1] == admin[numOfUser / 2 + i])
+            if (user[1]== admin[numOfUser / 2 + i])
             {
                 cout << "\t\t\tAdmin id : " << user[0] << endl
                      << endl;
             stud:
-               student(); // this function will call when user id & password is mathced to database
-               flag = true; 
-               break;
-            }
-            else
-            {
-                cout << "Wrong Password!" << endl
-                     << endl;
-                if (attempt > 0 )
-                {
-                    attempt--;
-                    goto pass;
-                }
-                else
-                {
-                    cout << "Tried Timeout" << endl
-                         << endl;
-                }
+                student(); // this function will call when user id & password is mathced to database
+                flag = true;
                 break;
             }
         }
+    }
+    if (flag == false)
+    {
+        if(id==false)
+        cout << "Wrong user id" << endl<<endl;
+        else
+        cout << "Wrong Password!" << endl<< endl;
+        if (attempt > 0)
+        {
+            attempt--;
+            if(id == false)
+            goto users;
+            else
+            goto pass;
+        }
         else
         {
-            cout << "Wrong user id" << endl;
-
-            if (attempt > 0)
-            {
-                attempt--;
-                goto users;
-            }
-            else
-            {
-                cout << "Tried Timeout" << endl
-                     << endl;
-            }
-            break;
+            cout << "Tried Timeout" << endl
+                 << endl;
         }
     }
-    option:
+
+option:
     cout << "Do you want to exit : \n1. Yes \n2. No" << endl
          << endl;
     cout << "Enter your choice: ";
@@ -144,7 +145,7 @@ ch:
         {
             goto stud;
         }
-       else
+        else
         {
 
             cout << "Sorry you've tried many time" << endl;
