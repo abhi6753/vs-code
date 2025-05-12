@@ -7,11 +7,11 @@
 //  but hum file me rakhna tb sikhenge jab file handling padh lenge
 #include <iostream>
 #include <string>
-#include<algorithm>
+#include <algorithm>
 using namespace std;
 bool student()
 {
-    int i=0, num;
+    int i = 0, num;
     bool flag = true;
 input:
     cout << "Enter number of student: " << endl;
@@ -23,11 +23,11 @@ input:
         goto input;
     }
     if (num == 0)
-        flag= false;
-    num*=2;// double size ka array islie bnaye hai q ki hum student name and roll num of that student want to store
+        flag = false;
+    num *= 2; // double size ka array islie bnaye hai q ki hum student name and roll num of that student want to store
     fflush(stdin);
     string studentData[num];
-    for ( i = 0; i < num/2 ; i++)
+    for (i = 0; i < num / 2; i++)
     {
         cout << "Enter name of student: ";
     name:
@@ -38,92 +38,106 @@ input:
         cout << "Enter roll no. of student: ";
     roll:
         getline(cin, studentData[num / 2 + i]);
-        if (studentData[num /2 + i].size() == 0)
+        if (studentData[num / 2 + i].size() == 0)
             goto roll;
         // I can add one more conditon student roll allowed only 0-9 character
     }
-    if(flag == true)
-    cout << "\nStudent Data added successfully" << endl;
-    else
+    if (flag == true)
     {
-        cout<<"\nNo any stduent data added"<<endl;
+         cout << "\nStudent Data added successfully" << endl<<endl;
+        return true;
     }
-    return true;
+        
+    {
+        cout << "\nNo any stduent data added" << endl<<endl;
+    }
+    return false;
 }
 
 int main()
 {
     int ch, i, attempt = 3;
-    bool flag = false,id=false;
+    bool flag = false, id = false;
     int numOfUser = 3 * 2; // user 3 hi hai lekin hume unka password v store krwana hai isiliye double size ka array bna rhe
     string admin[numOfUser] = {"abhishek29073@gmail.com", "sonuk8314@gmail.com", "ramanujsharma256@gmail.com", "Abhishek@9155", "Vivek@9031", "Sharma@9771"};
     string user[2]; // user input to authenticate]
     cout << "\t\t\t\t\t\t\tAdmin Verification" << endl;
 users:
-    //if (attempt == 3)
-        cout << "Enter user id: " ;
+    cout << "Enter user id: ";
 
     if (attempt != 3)
     {
-        cout << "\t\t\t\t\t\t\tRemaining Attempt : " << attempt + 1 ;
+        cout << "\t\t\t\t\t\t\tRemaining Attempt : " << attempt + 1;
     }
-    cout<<endl;
+    cout << endl;
     getline(cin, user[0]); // input user id
     if (user[0].size() == 0)
     {
         goto users;
     }
 
-    for (i = 0; i < numOfUser / 2; i++) // user login user id & pass validation
+    for (i = 0; i < numOfUser / 2; i++) // user id validation
     {
-        if (user[0]==admin[i])
+        if (user[0] == admin[i])
         {
-           
             id = flag = true;
             attempt = 3;
-        pass:
-            if (attempt == 3)
-                cout << "Enter password: " << endl;
-
-            if (attempt != 3)
-            {
-                cout << "\t\t\t\t\t\t\tRemaining Attempt : " << attempt + 1 << endl;
-            }
-            getline(cin, user[1]);
-            if (user[1].size() == 0)
-            {
-                goto pass;
-            }
-
-            if (user[1]== admin[numOfUser / 2 + i])
-            {
-                cout << "\t\t\tAdmin id : " << user[0] << endl
-                     << endl;
-            stud:
-                student(); // this function will call when user id & password is mathced to database
-                flag = true;
-                break;
-            }
+            break;
         }
     }
     if (flag == false)
     {
-        if(id==false)
-        cout << "Wrong user id" << endl<<endl;
-        else
-        cout << "Wrong Password!" << endl<< endl;
+        cout << "Wrong user id" << endl
+             << endl;
         if (attempt > 0)
         {
             attempt--;
-            if(id == false)
             goto users;
-            else
-            goto pass;
         }
         else
         {
             cout << "Tried Timeout" << endl
                  << endl;
+            goto option;
+        }
+    }
+flag = false;
+// password checking
+pass:
+        cout << "Enter password: " << endl;
+
+    if (attempt != 3)
+    {
+        cout << "\t\t\t\t\t\t\tRemaining Attempt : " << attempt + 1 << endl;
+    }
+    getline(cin, user[1]);
+    if (user[1].size() == 0)
+    {
+        goto pass;
+    }
+    for ( i = 0; i < numOfUser / 2; i++)
+    {
+        if (user[1] == admin[numOfUser / 2 + i])
+        {
+            cout << "\t\t\tAdmin id : " << user[0] << endl
+                 << endl;
+            flag = true;
+        stud:
+            student(); // this function will call when user id & password is mathced to database
+           break;
+        }
+    }
+    if (flag == false)
+    {
+        cout << "Wrong Password!" << endl<< endl;
+        if (attempt > 0)
+        {
+            attempt--;
+            goto pass;
+        }
+        else
+        {
+            cout << "Tried Timeout" << endl<< endl;
         }
     }
 
