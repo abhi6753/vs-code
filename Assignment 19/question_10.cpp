@@ -57,7 +57,7 @@ input:
 int main()
 {
     int ch, i, attempt = 3;
-    bool flag = false, id = false;
+    bool flag = false;
     int numOfUser = 3 * 2; // user 3 hi hai lekin hume unka password v store krwana hai isiliye double size ka array bna rhe
     string admin[numOfUser] = {"abhishek29073@gmail.com", "sonuk8314@gmail.com", "ramanujsharma256@gmail.com", "Abhishek@9155", "Vivek@9031", "Sharma@9771"};
     string user[2]; // user input to authenticate]
@@ -80,7 +80,7 @@ users:
     {
         if (user[0] == admin[i])
         {
-            id = flag = true;
+            flag = true;
             attempt = 3;
             break;
         }
@@ -101,7 +101,7 @@ users:
             goto option;
         }
     }
-flag = false;
+flag = false; // flag false kr diye taki agr password galat ho to niche ki condition chale
 // password checking
 pass:
         cout << "Enter password: " << endl;
