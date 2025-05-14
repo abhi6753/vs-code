@@ -1,7 +1,7 @@
 // 10. Create an authentication system. It should be menu driven.
 
 // Humne authentication system bnaya hai jisme phle valid admin hai ya ni usko check krega agr valid admin hai to fir
-//  student name and his/her roll no. can added in student string
+//  student name and his/her roll no. can add in student string
 //  Note:: Humne admin array ko as a admin data base  mana hai jisme phle se hi valid admin username & password rakha hua hai
 //  Hum studentData me jo v value lenge usey maan k chl rhe hai ki hum ek text file me rakh rhe hai
 //  but hum file me rakhna tb sikhenge jab file handling padh lenge
@@ -60,7 +60,7 @@ int main()
     bool flag = false;
     int numOfUser = 3 * 2; // user 3 hi hai lekin hume unka password v store krwana hai isiliye double size ka array bna rhe
     string admin[numOfUser] = {"abhishek29073@gmail.com", "sonuk8314@gmail.com", "ramanujsharma256@gmail.com", "Abhishek@9155", "Vivek@9031", "Sharma@9771"};
-    string user[2]; // user input to authenticate]
+    string user[2]; // user input to authenticate
     cout << "\t\t\t\t\t\t\tAdmin Verification" << endl;
 users:
     cout << "Enter user id: ";
